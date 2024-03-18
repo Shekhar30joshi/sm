@@ -1,0 +1,32 @@
+<div class="container-fluid rounded">
+  <app-header [title]="title"></app-header>
+  <hr />
+  <div class="row">
+    <div class="col-12 my-2" *ngFor="let child of allChilds">
+      <div class="card" style="background-color: #e9eef3">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-4">
+              <img
+                [src]="child?.image"
+                alt=""
+                class="img-responsive"
+                width="70"
+                height="70"
+              />
+            </div>
+            <div class="col-8">
+              <span>Name: {{ child?.name }}</span
+              ><br />
+              <span>Class: {{ child?.class }}</span
+              ><br />
+              <span>Roll No: {{ child?.rollNo }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <app-footer></app-footer>
+</div>

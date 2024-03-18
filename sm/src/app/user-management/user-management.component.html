@@ -1,0 +1,33 @@
+<div class="container-fluid rounded">
+  <app-header [headerData]="headerData"></app-header>
+  <hr />
+  <div class="card" style="background-color: #e9eef3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-4 p-2" *ngFor="let item of modules">
+          <div
+            class="card rounded"
+            (click)="getChildDetails(item)"
+            style="height: 180px"
+          >
+            <div class="card-body">
+              <div class="text-center py-2">
+                <img
+                  [src]="item?.image"
+                  alt=""
+                  class="img-fluid"
+                  style="border-radius: 50px"
+                />
+              </div>
+              <div class="text-center mt-1" style="font-family: sans-serif">
+                {{ item?.name }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <app-footer></app-footer>
+</div>
