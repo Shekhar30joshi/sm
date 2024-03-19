@@ -48,7 +48,7 @@ export class LoginComponent {
           console.log(res);
         },
         (err: any) => {
-          this.showSnackbarCssStyles('Successfully logged in !', '', 3000);
+          // this.showSnackbarCssStyles('Successfully logged in !', '', 3000);
           console.log(err.message);
           this.router.navigate(['/user-management']);
         }
