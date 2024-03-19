@@ -3,19 +3,28 @@
   <hr />
   <div class="row">
     <div class="col-12 my-2" *ngFor="let child of allChilds">
-      <div class="card" style="background-color: #e9eef3">
+      <div class="">
         <div class="card-body">
-          <div class="row">
-            <div class="col-4">
+          <div class="row px-4">
+            <div class="col-1 p-2">
               <img
                 [src]="child?.image"
                 alt=""
                 class="img-responsive"
-                width="70"
-                height="70"
+                width="45"
+                height="45"
+                style="
+                  border-radius: 20%;
+                  position: relative;
+                  left: 0px;
+                  top: 8px;
+                "
               />
             </div>
-            <div class="col-8">
+            <div
+              class="col-10 text-center p-2"
+              style="background-color: #e9eef3; border-radius: 10px"
+            >
               <span>Name: {{ child?.name }}</span
               ><br />
               <span>Class: {{ child?.class }}</span
@@ -28,5 +37,5 @@
     </div>
   </div>
   <hr />
-  <app-footer style="position: sticky; bottom: 30px"></app-footer>
+  <app-footer style="position: sticky; bottom: 5px"></app-footer>
 </div>
