@@ -12,9 +12,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ChildDetailsComponent } from './user-management/child-details/child-details.component';
-
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 @NgModule({
-  declarations: [AppComponent, UserManagementComponent, HeaderComponent, FooterComponent, ChildDetailsComponent],
+  declarations: [
+    AppComponent,
+    UserManagementComponent,
+    HeaderComponent,
+    FooterComponent,
+    ChildDetailsComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -23,6 +29,7 @@ import { ChildDetailsComponent } from './user-management/child-details/child-det
     HttpClientModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
+    IvyCarouselModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

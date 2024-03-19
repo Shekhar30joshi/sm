@@ -9,6 +9,13 @@ import { CommonService } from '../services/common.service';
 export class UserManagementComponent implements OnInit {
   constructor(private router: Router, private service: CommonService) {}
 
+  images = [
+    { path: 'https://source.unsplash.com/800x600/?nature' },
+    { path: 'https://source.unsplash.com/800x600/?car' },
+    { path: 'https://source.unsplash.com/800x600/?moto' },
+    { path: 'https://source.unsplash.com/800x600/?fantasy' },
+  ];
+
   headerData = [
     {
       id: 1,
