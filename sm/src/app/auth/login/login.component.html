@@ -32,26 +32,26 @@
         <div class="col-12 my-2">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
             <div class="form-group my-2">
-              <!-- <label for="exampleInputEmail1">Email address</label> -->
+              <!-- <label for="exampleInputusername1">username address</label> -->
               <input
-                type="email"
+                type="username"
                 class="form-control"
-                formControlName="email"
-                placeholder="Enter email"
+                formControlName="username"
+                placeholder="Enter username"
               />
               <small
                 class="form-text text-danger"
-                *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors?.['required']"
+                *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].errors?.['required']"
               >
-                Please enter email address.!
+                Please enter username !
               </small>
 
-              <small
+              <!-- <small
                 class="form-text text-danger"
-                *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].errors?.['email']"
+                *ngIf="loginForm.controls['username'].touched && loginForm.controls['username'].errors?.['username']"
               >
-                Email address is incorrect!
-              </small>
+                username address is incorrect!
+              </small> -->
             </div>
 
             <div class="form-group my-2">

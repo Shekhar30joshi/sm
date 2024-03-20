@@ -24,7 +24,7 @@ export class LoginComponent {
     private router: Router
   ) {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
+      username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }
@@ -41,16 +41,20 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    console.log(this.loginForm);
+    sessionStorage.clear();
     if (this.loginForm.valid) {
       this.service.login(this.loginForm.value).subscribe(
         (res: any) => {
-          console.log(res);
+          if (res?.data?.status == 'success') {
+            sessionStorage.setItem('loggedInUser', JSON.stringify(res?.data));
+            this.router.navigate(['/user-management']);
+          } else {
+            this.showSnackbarCssStyles(res?.data?.message, '', 3000);
+            return;
+          }
         },
         (err: any) => {
-          // this.showSnackbarCssStyles('Successfully logged in !', '', 3000);
-          console.log(err.message);
-          this.router.navigate(['/user-management']);
+          this.showSnackbarCssStyles(err?.message, '', 3000);
         }
       );
     }

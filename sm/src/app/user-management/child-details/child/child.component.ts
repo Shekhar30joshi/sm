@@ -12,6 +12,9 @@ export class ChildComponent implements OnInit {
     public dialogRef: MatDialogRef<ChildComponent>
   ) {}
 
+  backgroundColor = 'white';
+  color = 'black';
+
   ngOnInit(): void {
     console.log(this.data);
   }

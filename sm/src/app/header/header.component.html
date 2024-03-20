@@ -1,6 +1,5 @@
 <div
   style="
-    background-color: #01577c;
     border-bottom-right-radius: 30px;
     border-bottom-left-radius: 30px;
     height: 110px;
@@ -10,11 +9,12 @@
     top: 0;
     z-index: 100000;
   "
+  [ngStyle]="{ 'background-color': backgroundColor }"
   *ngIf="studentDetails; else childDetails"
 >
   <div class="row align-items-center p-4">
     <div class="col-4 d-flex justify-content-end">
-      <div class="circle">
+      <div class="circle" [ngStyle]="{ border: '2px solid ' + color }">
         <span>
           <img
             [src]="studentDetails?.[0]?.imgUrl"
@@ -28,9 +28,13 @@
       </div>
     </div>
     <div class="col-8">
-      <b style="color: white; font-family: monospace; font-size: 20px">{{
+      <b
+        style="font-family: monospace; font-size: 20px"
+        [ngStyle]="{ color: color }"
+        >{{
         studentDetails?.[0]?.name
-      }}</b>
+        }}</b
+      >
       <!-- <span class="d-flex">
         <p style="color: white; font-family: monospace">
           Class: {{ studentDetails?.[0]?.class }}

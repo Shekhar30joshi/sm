@@ -14,6 +14,8 @@ import {
 export class HeaderComponent implements OnInit, OnChanges {
   @Input() headerData: any;
   @Input() title: any;
+  @Input() backgroundColor: string = '';
+  @Input() color: string = '';
 
   studentDetails: any;
 

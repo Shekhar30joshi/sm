@@ -8,7 +8,8 @@ import { CommonService } from '../services/common.service';
 })
 export class UserManagementComponent implements OnInit {
   constructor(private router: Router, private service: CommonService) {}
-
+  backgroundColor = '#01577c';
+  color = 'white';
   images = [
     { path: 'https://source.unsplash.com/800x600/?nature' },
     { path: 'https://source.unsplash.com/800x600/?car' },
@@ -70,164 +71,27 @@ export class UserManagementComponent implements OnInit {
     },
   ];
 
-  allChildDetails = [
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'My Childs',
-      image: '../../assets/images/images (1).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-    {
-      name: 'Time Table',
-      image: '../../assets/images/images (2).jpeg',
-      dob: '30th July',
-      class: '10th A',
-      rollNo: 20,
-    },
-  ];
+  allChildDetails: any = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let body: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
+    let data = JSON.parse(sessionStorage.getItem('allChildren')!);
+    if (!data) {
+      this.getAllChildren(body?.TokenDetails?.userId);
+    } else {
+      this.allChildDetails = data;
+    }
+  }
+
+  getAllChildren(body: any) {
+    this.service.getAllChildrenData(body).subscribe((res: any) => {
+      this.allChildDetails = res?.data?.childsInfo;
+      sessionStorage.setItem(
+        'allChildren',
+        JSON.stringify(this.allChildDetails)
+      );
+    });
+  }
 
   getChildDetails(item: any) {
     console.log(item);

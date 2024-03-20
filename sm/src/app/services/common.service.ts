@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CommonService {
   constructor(private httpClient: HttpClient) {}
+  baseUrl = `http://localhost:3000/api/`;
 
   data: BehaviorSubject<any> = new BehaviorSubject([]);
   castData = this.data.asObservable();
@@ -15,8 +16,13 @@ export class CommonService {
     this.data.next(a);
   }
 
+  //login api
   login(body: any) {
-    console.log(body);
-    return this.httpClient.post('endPoint', body);
+    return this.httpClient.post(this.baseUrl + 'users/parentLogin', body);
+  }
+
+  //all children data api
+  getAllChildrenData(body: any) {
+    return this.httpClient.post(this.baseUrl + 'users/getChilds', body);
   }
 }
