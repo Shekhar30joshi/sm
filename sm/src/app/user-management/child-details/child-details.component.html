@@ -3,9 +3,9 @@
   <hr />
   <div class="row">
     <div class="col-12 my-2" *ngFor="let child of allChilds">
-      <div class="">
+      <div class="" (click)="openDialog(child)">
         <div class="card-body">
-          <div class="row px-4">
+          <div class="row ps-3">
             <div class="col-1 p-2">
               <img
                 [src]="child?.image"

@@ -1,0 +1,36 @@
+<div class="container p-0" style="overflow-y: scroll; height: auto">
+  <i
+    class="fa fa-close"
+    style="
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      position: absolute;
+      z-index: 1000000;
+      right: 47px;
+      top: 15px;
+    "
+    (click)="close()"
+  ></i>
+  <app-header [headerData]="headerData"></app-header>
+  <hr />
+  <div class="row p-3 mt-3">
+    <div class="col-4 p-1" *ngFor="let item of modules">
+      <div class="text-center py-2">
+        <img
+          [src]="item?.image"
+          alt=""
+          class="img-fluid"
+          width="70"
+          style="height: 65px; border-radius: 15px"
+        />
+      </div>
+      <div class="text-center mt-1" style="font-family: sans-serif">
+        {{ item?.name }}
+      </div>
+      <!-- </div> -->
+      <!-- </div> -->
+    </div>
+  </div>
+  <hr />
+</div>
