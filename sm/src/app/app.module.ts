@@ -13,6 +13,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ChildDetailsComponent } from './user-management/child-details/child-details.component';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { ChildComponent } from './user-management/child-details/child/child.component';
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +22,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     HeaderComponent,
     FooterComponent,
     ChildDetailsComponent,
+    ChildComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     MatSnackBarModule,
     BrowserAnimationsModule,
     IvyCarouselModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
