@@ -1,27 +1,17 @@
-<div class="container p-0" style="overflow-y: scroll; height: auto">
-  <div class="row text-end" style="background-color: white">
-    <div class="col-12">
-      <i
-        class="fa fa-close m-2"
-        style="
-          font-size: 24px;
-          color: black;
-          cursor: pointer;
-          position: relative;
-          z-index: 1000000;
-        "
-        (click)="close()"
-      ></i>
-    </div>
-  </div>
+<div class="" style="height: auto">
   <app-header
-    [headerData]="headerData"
-    [backgroundColor]="backgroundColor"
-    [color]="color"
+    [route]="backRoute"
+    [title]="title"
+    [childProfilePic]="childProfilePic"
+    [profileFlag]="profileFlag"
   ></app-header>
   <hr />
   <div class="row p-3 mt-3">
-    <div class="col-4 p-1" *ngFor="let item of modules">
+    <div
+      class="col-4 p-1"
+      *ngFor="let item of modules"
+      (click)="openDialog(item)"
+    >
       <div class="text-center py-2">
         <img
           [src]="item?.image"
@@ -34,9 +24,8 @@
       <div class="text-center mt-1" style="font-family: sans-serif">
         {{ item?.name }}
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
     </div>
   </div>
   <hr />
+  <app-footer style="position: sticky; bottom: 5px"></app-footer>
 </div>

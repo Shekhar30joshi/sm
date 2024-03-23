@@ -1,16 +1,16 @@
-<div class="container-fluid rounded">
+<div class="" style="height: auto">
   <app-header [route]="backRoute" [title]="title"></app-header>
   <hr />
   <div class="row">
-    <div class="col-12 my-2" *ngFor="let child of allChilds">
-      <div class="" (click)="openDialog(child)">
+    <div class="col-12 my-2" *ngFor="let subject of allSubjects">
+      <div class="">
         <div class="card-body">
           <div class="row ps-3">
             <div class="col-1 p-2">
               <img
                 [src]="
-                  child?.profilePic
-                    ? child?.profilePic
+                  subject?.profilePic
+                    ? subject?.profilePic
                     : 'https://source.unsplash.com/800x600/?nature'
                 "
                 alt=""
@@ -29,11 +29,11 @@
               class="col-10 text-center p-2"
               style="background-color: #e9eef3; border-radius: 10px"
             >
-              <span>First Name: {{ child?.firstName }}</span
+              <span>First Name: {{ subject?.firstName }}</span
               ><br />
-              <span>Last Name: {{ child?.lastName }}</span
+              <span>Last Name: {{ subject?.lastName }}</span
               ><br />
-              <span>Age: {{ child?.age }}</span>
+              <span>Age: {{ subject?.age }}</span>
             </div>
           </div>
         </div>

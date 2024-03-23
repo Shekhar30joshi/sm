@@ -1,27 +1,48 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  Component,
+  Inject,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-child',
   templateUrl: './child.component.html',
   styleUrls: ['./child.component.scss'],
 })
-export class ChildComponent implements OnInit {
+export class ChildComponent implements OnInit, OnChanges {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
-    public dialogRef: MatDialogRef<ChildComponent>
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: CommonService
   ) {}
 
+  title = 'Child';
+  backRoute: string = '/child-details';
   backgroundColor = 'white';
   color = 'black';
+  child: any;
+  childProfilePic: string = '';
+  profileFlag: boolean = true;
 
-  ngOnInit(): void {
-    console.log(this.data);
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
   }
 
-  //dialog close
-  close() {
-    this.dialogRef.close();
+  ngOnInit(): void {
+    let child = JSON.parse(sessionStorage.getItem('child')!);
+    this.child = child;
+    this.title = child.firstName;
+    this.childProfilePic = child?.profilePic;
   }
 
   headerData = [
@@ -42,7 +63,7 @@ export class ChildComponent implements OnInit {
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
     {
-      name: 'Timetable',
+      name: 'Subject',
       image:
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
@@ -77,4 +98,24 @@ export class ChildComponent implements OnInit {
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
   ];
+
+  openDialog(child: any) {
+    switch (child?.name) {
+      case 'Attendance':
+        this.router.navigate(['/attendance'], {
+          queryParams: { childDetails: child?.name },
+        });
+        break;
+
+      case 'Subject':
+        this.router.navigate(['/subject'], {
+          queryParams: { parentId: this.child?.parent_id },
+        });
+        break;
+      // default:
+      // case '':
+      //   // insert your code here
+      //   break;
+    }
+  }
 }

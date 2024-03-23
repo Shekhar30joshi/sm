@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ChildComponent } from './child/child.component';
@@ -12,32 +12,30 @@ export class ChildDetailsComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private service: CommonService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   title: string = '';
-  allChilds: any;
+  allChilds: any = [];
+  backRoute: string = 'user-management';
 
   ngOnInit(): void {
+    this.allChilds = [];
     this.service.castData.subscribe((res: any) => {
-      console.log(res);
       this.allChilds = res;
     });
     this.route.queryParams.subscribe((res: any) => {
-      console.log(res);
-      this.title = res.childDetails;
+      this.title = 'My Childs';
     });
   }
 
   ngOnDestroy(): void {}
 
   openDialog(child: any) {
-    const dialogRef = this.dialog.open(ChildComponent, {
-      data: child,
-      panelClass: 'custom-dialog-container',
-    });
-    dialogRef.afterClosed().subscribe((result: any) => {
-      console.log('The dialog was closed');
+    sessionStorage.setItem('child', JSON.stringify(child));
+    this.router.navigate(['/child'], {
+      queryParams: { childDetails: child?.firstName },
     });
   }
 }

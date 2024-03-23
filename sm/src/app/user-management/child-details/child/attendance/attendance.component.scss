@@ -1,0 +1,44 @@
+.date-red {
+  background: #ff5a68 !important;
+  border-radius: 100% !important;
+}
+
+.date-green {
+  background: #00d094 !important;
+  border-radius: 100% !important;
+}
+
+.mat-datepicker-content {
+  // background-color: transparent !important;
+  box-shadow: none !important;
+  padding-left: 40px !important;
+  padding-right: 40px !important;
+}
+.mat-datepicker-content .mat-calendar {
+  // overflow: scroll !important;
+  width: auto !important;
+  height: 334px !important;
+}
+
+.mat-datepicker-popup {
+  // left: 39px !important;
+  top: 142px !important;
+  left: 0px !important;
+  overflow-x: hidden !important;
+}
+
+.mat-calendar-body-cell-container {
+  pointer-events: none !important;
+}
+
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+  opacity: 0 !important;
+}
+
+// .mat-dialog-container {
+//   display: none !important;
+// }
+
+.cdk-overlay-connected-position-bounding-box {
+  overflow: auto !important;
+}

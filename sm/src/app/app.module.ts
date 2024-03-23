@@ -15,6 +15,9 @@ import { ChildDetailsComponent } from './user-management/child-details/child-det
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { ChildComponent } from './user-management/child-details/child/child.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { AttendanceComponent } from './user-management/child-details/child/attendance/attendance.component';
+import { DemoMaterialModule } from './material-module';
+import { SubjectComponent } from './user-management/child-details/child/subject/subject.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +26,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     FooterComponent,
     ChildDetailsComponent,
     ChildComponent,
+    AttendanceComponent,
+    SubjectComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,6 +39,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     BrowserAnimationsModule,
     IvyCarouselModule,
     MatDialogModule,
+    DemoMaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

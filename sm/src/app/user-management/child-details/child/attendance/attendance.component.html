@@ -1,0 +1,127 @@
+<div class="" style="height: auto">
+  <app-header [route]="backRoute" [title]="title"></app-header>
+  <hr />
+  <div class="row" style="z-index: 10; position: relative; height: 300px">
+    <div
+      class="col-12"
+      style="overflow-y: scroll; overflow-x: hidden !important"
+    >
+      <div style="display: none">
+        <div class="datepicker-header" #datepickerHeader>
+          <div class="row px-2">
+            <div class="col-6 p-3">
+              <div class="card text-center" style="background-color: #00d094">
+                <div class="card-body">
+                  <h4 style="color: white; height: 50px">Total Present</h4>
+                  <p>
+                    <span
+                      style="
+                        border: 1px solid white;
+                        border-radius: 50%;
+                        padding: 6px;
+                        background: white;
+                        color: #00d094;
+                      "
+                      >20</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 p-3">
+              <div class="card text-center" style="background-color: #ff5a68">
+                <div class="card-body">
+                  <h4 style="color: white; height: 50px">Total Absent</h4>
+
+                  <p>
+                    <span
+                      style="
+                        border: 1px solid white;
+                        border-radius: 50%;
+                        padding: 6px;
+                        background: white;
+                        color: #ff5a68;
+                      "
+                      >20</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <input matInput [matDatepicker]="picker" class="d-none" />
+      <mat-datepicker-toggle
+        [for]="picker"
+        class="d-none"
+      ></mat-datepicker-toggle>
+      <mat-datepicker
+        (closed)="onClose()"
+        #picker
+        [dateClass]="dateClass"
+      ></mat-datepicker>
+      <button
+        mat-button
+        [ngClass]="{ check: open(picker) }"
+        class="d-none"
+      ></button>
+      <div style="display: none">
+        <div class="datepicker-footer" #datepickerFooter>
+          <div class="row px-2">
+            <div class="col-6 p-3">
+              <div class="card text-center" style="background-color: #00d094">
+                <div class="card-body">
+                  <h4 style="color: white; height: 50px">Total Present</h4>
+                  <p>
+                    <span
+                      style="
+                        border: 1px solid white;
+                        border-radius: 50%;
+                        padding: 6px;
+                        background: white;
+                        color: #00d094;
+                      "
+                      >20</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 p-3">
+              <div class="card text-center" style="background-color: #ff5a68">
+                <div class="card-body">
+                  <h4 style="color: white; height: 50px">Total Absent</h4>
+
+                  <p>
+                    <span
+                      style="
+                        border: 1px solid white;
+                        border-radius: 50%;
+                        padding: 6px;
+                        background: white;
+                        color: #ff5a68;
+                      "
+                      >20</span
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <app-footer
+                style="
+                  position: sticky;
+                  bottom: 5px;
+                  z-index: 100;
+                  position: relative;
+                "
+              ></app-footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>

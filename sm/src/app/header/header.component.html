@@ -35,6 +35,8 @@
         studentDetails?.[0]?.name
         }}</b
       >
+      <br />
+      <p style="color: white">{{ role }}</p>
       <!-- <span class="d-flex">
         <p style="color: white; font-family: monospace">
           Class: {{ studentDetails?.[0]?.class }}
@@ -67,13 +69,26 @@
       <i
         class="fa fa-arrow-left"
         style="font-size: 20px; color: white"
-        routerLink="/user-management"
+        [routerLink]="'/' + route"
       ></i>
     </div>
-    <div class="col-8">
-      <span style="color: white">{{ title }}</span>
+    <div class="col-4 text-center">
+      <img
+        *ngIf="profileFlag"
+        [src]="
+          childProfilePic
+            ? childProfilePic
+            : 'https://source.unsplash.com/800x600/?nature'
+        "
+        class="img-responsive"
+        alt=""
+        width="55"
+        height="55"
+        style="border-radius: 50%"
+      />
+      <span style="color: white" class="ms-2">{{ title }}</span>
     </div>
-    <div class="row d-flex justify-content-center">
+    <div class="row d-flex justify-content-center ps-5">
       <div
         class="col-12 px-3"
         style="

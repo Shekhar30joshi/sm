@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonService } from '../services/common.service';
 @Component({
@@ -6,10 +6,14 @@ import { CommonService } from '../services/common.service';
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.scss'],
 })
-export class UserManagementComponent implements OnInit {
+export class UserManagementComponent implements OnInit, OnDestroy {
   constructor(private router: Router, private service: CommonService) {}
+
   backgroundColor = '#01577c';
   color = 'white';
+  role = 'Parent';
+  allChildDetails: any = [];
+
   images = [
     { path: 'https://source.unsplash.com/800x600/?nature' },
     { path: 'https://source.unsplash.com/800x600/?car' },
@@ -71,33 +75,34 @@ export class UserManagementComponent implements OnInit {
     },
   ];
 
-  allChildDetails: any = [];
-
-  ngOnInit(): void {
-    let body: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
-    let data = JSON.parse(sessionStorage.getItem('allChildren')!);
-    if (!data) {
-      this.getAllChildren(body?.TokenDetails?.userId);
-    } else {
-      this.allChildDetails = data;
-    }
-  }
+  ngOnInit(): void {}
 
   getAllChildren(body: any) {
     this.service.getAllChildrenData(body).subscribe((res: any) => {
       this.allChildDetails = res?.data?.childsInfo;
-      sessionStorage.setItem(
-        'allChildren',
-        JSON.stringify(this.allChildDetails)
-      );
+      this.service.updateAllChildrenData(this.allChildDetails);
     });
   }
 
   getChildDetails(item: any) {
-    console.log(item);
-    this.service.updateAllChildrenData(this.allChildDetails);
+    console.log('item===>', item);
+    let body: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
+    this.service.updateAllChildrenData([]);
+
+    switch (item?.name) {
+      case 'My Childs':
+        this.getAllChildren(body?.TokenDetails?.userId);
+        break;
+      // default:
+      // case '':
+      //   // insert your code here
+      //   break;
+    }
+
     this.router.navigate(['/child-details'], {
       queryParams: { childDetails: item?.name },
     });
   }
+
+  ngOnDestroy() {}
 }
