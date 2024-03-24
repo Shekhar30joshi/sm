@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit, OnChanges {
     this.studentDetails = changes?.['headerData']?.currentValue;
     this.route = changes?.['route']?.currentValue;
     this.title = changes?.['title']?.currentValue;
+    this.color = changes?.['color']?.currentValue;
     this.childProfilePic = changes?.['childProfilePic']?.currentValue;
     this.profileFlag = changes?.['profileFlag']?.currentValue;
     console.log(this.studentDetails);

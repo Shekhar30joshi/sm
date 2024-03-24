@@ -29,7 +29,7 @@ export class ChildComponent implements OnInit, OnChanges {
   title = 'Child';
   backRoute: string = '/child-details';
   backgroundColor = 'white';
-  color = 'black';
+  color = 'white';
   child: any;
   childProfilePic: string = '';
   profileFlag: boolean = true;

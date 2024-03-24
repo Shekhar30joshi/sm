@@ -72,21 +72,33 @@
         [routerLink]="'/' + route"
       ></i>
     </div>
-    <div class="col-4 text-center">
-      <img
+    <div
+      class="col-4 text-center"
+      [ngStyle]="{ display: profileFlag ? 'contents' : '' }"
+    >
+      <div
         *ngIf="profileFlag"
-        [src]="
-          childProfilePic
-            ? childProfilePic
-            : 'https://source.unsplash.com/800x600/?nature'
-        "
-        class="img-responsive"
-        alt=""
-        width="55"
-        height="55"
-        style="border-radius: 50%"
-      />
-      <span style="color: white" class="ms-2">{{ title }}</span>
+        class="circle"
+        [ngStyle]="{ border: '2px solid ' + color }"
+      >
+        <span>
+          <img
+            [src]="
+              childProfilePic
+                ? childProfilePic
+                : 'https://source.unsplash.com/800x600/?nature'
+            "
+            class="img-responsive"
+            alt=""
+            width="55"
+            height="55"
+            style="border-radius: 50%"
+          />
+        </span>
+      </div>
+      <div>
+        <span style="color: white" class="ms-2">{{ title }}</span>
+      </div>
     </div>
     <div class="row d-flex justify-content-center ps-5">
       <div
