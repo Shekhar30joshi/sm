@@ -19,15 +19,19 @@ export class SubjectComponent implements OnInit {
   allSubjects: any = [];
 
   ngOnInit(): void {
+    let child = JSON.parse(sessionStorage.getItem('child')!);
     this.route.queryParams.subscribe((res: any) => {
-      this.getAllSubject(res?.parentId);
-      this.title = 'Subjects';
+      console.log(res);
+      this.getAllSubject(child?.id);
+      this.title = res.name;
     });
   }
 
-  getAllSubject(body: any) {
-    this.service.getAllSubject(body).subscribe((res: any) => {
-      this.allSubjects = res?.data?.childsInfo;
+  getAllSubject(id: any) {
+    let obj = { id: id };
+    this.service.getAllSubject(obj).subscribe((res: any) => {
+      this.allSubjects = res?.data?.subject_info;
+      console.log(this.allSubjects);
     });
   }
 }

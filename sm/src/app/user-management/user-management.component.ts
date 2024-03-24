@@ -91,7 +91,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
     switch (item?.name) {
       case 'My Childs':
-        this.getAllChildren(body?.TokenDetails?.userId);
+        this.getAllChildren({ id: body?.TokenDetails?.userId });
         break;
       // default:
       // case '':

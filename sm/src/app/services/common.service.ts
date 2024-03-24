@@ -29,7 +29,10 @@ export class CommonService {
   //get aall subjects
 
   getAllSubject(body: any) {
-    return this.httpClient.post(this.baseUrl + 'users/getChilds', body);
+    return this.httpClient.post(
+      this.baseUrl + 'class_subjects/getClassSubjects',
+      body
+    );
   }
 
   //attendance api

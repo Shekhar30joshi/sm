@@ -17,23 +17,19 @@
                 class="img-responsive"
                 width="45"
                 height="45"
-                style="
-                  border-radius: 20%;
-                  position: relative;
-                  left: 0px;
-                  top: 8px;
-                "
+                style="border-radius: 20%; position: relative; left: 0px"
               />
             </div>
             <div
-              class="col-10 text-center p-2"
+              class="col-10 text-center p-2 d-flex align-items-center justify-content-center"
               style="background-color: #e9eef3; border-radius: 10px"
             >
-              <span>First Name: {{ subject?.firstName }}</span
+              <span style="text-transform: capitalize"
+                >Name: {{ subject?.NAME }}</span
               ><br />
-              <span>Last Name: {{ subject?.lastName }}</span
+              <!-- <span>Last Name: {{ subject?.lastName }}</span
               ><br />
-              <span>Age: {{ subject?.age }}</span>
+              <span>Age: {{ subject?.age }}</span> -->
             </div>
           </div>
         </div>

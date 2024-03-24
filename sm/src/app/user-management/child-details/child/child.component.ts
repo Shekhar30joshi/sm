@@ -109,7 +109,7 @@ export class ChildComponent implements OnInit, OnChanges {
 
       case 'Subject':
         this.router.navigate(['/subject'], {
-          queryParams: { parentId: this.child?.parent_id },
+          queryParams: { name: child?.name },
         });
         break;
       // default:

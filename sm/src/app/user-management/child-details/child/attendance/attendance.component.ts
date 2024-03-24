@@ -66,23 +66,21 @@ export class AttendanceComponent implements OnInit {
   }
 
   //get attendance
-  getAttendance() {
-    let body: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
-    this.service
-      .getAttendanceData(body?.TokenDetails?.userId)
-      .subscribe((res: any) => {
-        console.log(res);
-        this.dateArr = res?.data?.data;
-        this.dateArr?.forEach((element: any) => {
-          return (element.attendance_date = element?.attendance_date.substring(
-            0,
-            10
-          ));
-        });
-        this.picker.open();
-
-        console.log(this.dateArr);
+  getAttendance(id: any) {
+    let obj = { id: id };
+    this.service.getAttendanceData(obj).subscribe((res: any) => {
+      console.log(res);
+      this.dateArr = res?.data?.data;
+      this.dateArr?.forEach((element: any) => {
+        return (element.attendance_date = element?.attendance_date.substring(
+          0,
+          10
+        ));
       });
+      this.picker.open();
+
+      console.log(this.dateArr);
+    });
   }
 
   ngOnInit(): void {
@@ -90,7 +88,8 @@ export class AttendanceComponent implements OnInit {
       console.log(res);
       this.title = res.childDetails;
     });
-    this.getAttendance();
+    let child = JSON.parse(sessionStorage.getItem('child')!);
+    this.getAttendance(child?.id);
   }
 
   dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
