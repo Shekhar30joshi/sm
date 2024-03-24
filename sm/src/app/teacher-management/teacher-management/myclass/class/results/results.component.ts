@@ -1,27 +1,27 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommonService } from '../services/common.service';
+import { Component, OnInit } from '@angular/core';
+
 @Component({
-  selector: 'app-user-management',
-  templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.scss'],
+  selector: 'app-results',
+  templateUrl: './results.component.html',
+  styleUrls: ['./results.component.scss'],
 })
-export class UserManagementComponent implements OnInit, OnDestroy {
-  constructor(private router: Router, private service: CommonService) {}
+export class ResultsComponent implements OnInit {
+  constructor() {}
 
-  footerLink = '/user-management';
-  backgroundColor = '#01577c';
+  ngOnInit(): void {
+    let child = JSON.parse(sessionStorage.getItem('class')!);
+    this.child = child;
+    this.title = child.firstName;
+    this.childProfilePic = child?.profilePic;
+  }
+  footerLink = '/teacher-management';
+  title = 'Results';
+  backRoute: string = '/class';
+  backgroundColor = 'white';
   color = 'white';
-  role = 'Parent';
-  allChildDetails: any = [];
-
-  images = [
-    { path: 'https://source.unsplash.com/800x600/?nature' },
-    { path: 'https://source.unsplash.com/800x600/?car' },
-    { path: 'https://source.unsplash.com/800x600/?moto' },
-    { path: 'https://source.unsplash.com/800x600/?fantasy' },
-  ];
-
+  child: any;
+  childProfilePic: string = '';
+  profileFlag: boolean = true;
   headerData = [
     {
       id: 1,
@@ -35,12 +35,12 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   modules = [
     {
-      name: 'My Childs',
+      name: 'Attendance',
       image:
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
     {
-      name: 'Time Table',
+      name: 'Subject',
       image:
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
@@ -76,34 +76,23 @@ export class UserManagementComponent implements OnInit, OnDestroy {
     },
   ];
 
-  ngOnInit(): void {}
+  openDialog(child: any) {
+    switch (child?.name) {
+      case 'Attendance':
+        // this.router.navigate(['/attendance'], {
+        //   queryParams: { childDetails: child?.name },
+        // });
+        break;
 
-  getAllChildren(body: any) {
-    this.service.getAllChildrenData(body).subscribe((res: any) => {
-      this.allChildDetails = res?.data?.childsInfo;
-      this.service.updateAllChildrenData(this.allChildDetails);
-    });
-  }
-
-  getChildDetails(item: any) {
-    console.log('item===>', item);
-    let body: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
-    this.service.updateAllChildrenData([]);
-
-    switch (item?.name) {
-      case 'My Childs':
-        this.getAllChildren({ id: body?.TokenDetails?.userId });
+      case 'Subject':
+        // this.router.navigate(['/subject'], {
+        //   queryParams: { name: child?.name },
+        // });
         break;
       // default:
       // case '':
       //   // insert your code here
       //   break;
     }
-
-    this.router.navigate(['/child-details'], {
-      queryParams: { childDetails: item?.name },
-    });
   }
-
-  ngOnDestroy() {}
 }

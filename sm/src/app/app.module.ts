@@ -18,6 +18,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AttendanceComponent } from './user-management/child-details/child/attendance/attendance.component';
 import { DemoMaterialModule } from './material-module';
 import { SubjectComponent } from './user-management/child-details/child/subject/subject.component';
+import { TeacherManagementComponent } from './teacher-management/teacher-management/teacher-management.component';
+import { MyclassComponent } from './teacher-management/teacher-management/myclass/myclass.component';
+import { ClassComponent } from './teacher-management/teacher-management/myclass/class/class.component';
+import { ResultsComponent } from './teacher-management/teacher-management/myclass/class/results/results.component';
+import { MyTopicsComponent } from './teacher-management/teacher-management/myclass/class/my-topics/my-topics.component';
+import { TeacherAttendanceComponent } from './teacher-management/teacher-management/myclass/class/teacher-attendance/teacher-attendance.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,6 +34,12 @@ import { SubjectComponent } from './user-management/child-details/child/subject/
     ChildComponent,
     AttendanceComponent,
     SubjectComponent,
+    TeacherManagementComponent,
+    MyclassComponent,
+    ClassComponent,
+    ResultsComponent,
+    MyTopicsComponent,
+    TeacherAttendanceComponent,
   ],
   imports: [
     BrowserModule,

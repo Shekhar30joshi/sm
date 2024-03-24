@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CommonService } from '../services/common.service';
-@Component({
-  selector: 'app-user-management',
-  templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.scss'],
-})
-export class UserManagementComponent implements OnInit, OnDestroy {
-  constructor(private router: Router, private service: CommonService) {}
+import { CommonService } from 'src/app/services/common.service';
 
-  footerLink = '/user-management';
+@Component({
+  selector: 'app-teacher-management',
+  templateUrl: './teacher-management.component.html',
+  styleUrls: ['./teacher-management.component.scss'],
+})
+export class TeacherManagementComponent implements OnInit, OnDestroy {
+  constructor(private router: Router, private service: CommonService) {}
+  footerLink = '/teacher-management';
   backgroundColor = '#01577c';
   color = 'white';
-  role = 'Parent';
+  role = 'Teacher';
   allChildDetails: any = [];
 
   images = [
@@ -25,7 +25,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
   headerData = [
     {
       id: 1,
-      name: 'Divya Jaini',
+      name: 'Professor Rajat',
       class: '9th-A',
       rollNo: 10,
       imgUrl:
@@ -35,7 +35,7 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   modules = [
     {
-      name: 'My Childs',
+      name: 'My Class',
       image:
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
@@ -78,21 +78,13 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {}
 
-  getAllChildren(body: any) {
-    this.service.getAllChildrenData(body).subscribe((res: any) => {
-      this.allChildDetails = res?.data?.childsInfo;
-      this.service.updateAllChildrenData(this.allChildDetails);
-    });
-  }
-
   getChildDetails(item: any) {
     console.log('item===>', item);
-    let body: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
-    this.service.updateAllChildrenData([]);
+    // this.service.updateAllChildrenData([]);
 
     switch (item?.name) {
-      case 'My Childs':
-        this.getAllChildren({ id: body?.TokenDetails?.userId });
+      case 'My Class':
+        this.router.navigate(['/my-class']);
         break;
       // default:
       // case '':
@@ -100,9 +92,9 @@ export class UserManagementComponent implements OnInit, OnDestroy {
       //   break;
     }
 
-    this.router.navigate(['/child-details'], {
-      queryParams: { childDetails: item?.name },
-    });
+    // this.router.navigate(['/child-details'], {
+    //   queryParams: { childDetails: item?.name },
+    // });
   }
 
   ngOnDestroy() {}

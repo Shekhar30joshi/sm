@@ -1,31 +1,53 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { CommonService } from '../services/common.service';
+import {
+  Component,
+  Inject,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
+
 @Component({
-  selector: 'app-user-management',
-  templateUrl: './user-management.component.html',
-  styleUrls: ['./user-management.component.scss'],
+  selector: 'app-class',
+  templateUrl: './class.component.html',
+  styleUrls: ['./class.component.scss'],
 })
-export class UserManagementComponent implements OnInit, OnDestroy {
-  constructor(private router: Router, private service: CommonService) {}
-
-  footerLink = '/user-management';
-  backgroundColor = '#01577c';
+export class ClassComponent implements OnInit, OnChanges {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private service: CommonService
+  ) {}
+  footerLink = '/teacher-management';
+  title = 'Class';
+  backRoute: string = '/my-class';
+  backgroundColor = 'white';
   color = 'white';
-  role = 'Parent';
-  allChildDetails: any = [];
+  child: any;
+  childProfilePic: string = '';
+  profileFlag: boolean = true;
 
-  images = [
-    { path: 'https://source.unsplash.com/800x600/?nature' },
-    { path: 'https://source.unsplash.com/800x600/?car' },
-    { path: 'https://source.unsplash.com/800x600/?moto' },
-    { path: 'https://source.unsplash.com/800x600/?fantasy' },
-  ];
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+  }
+
+  ngOnInit(): void {
+    let child = JSON.parse(sessionStorage.getItem('class')!);
+    this.child = child;
+    this.title = child.className;
+    this.childProfilePic = child?.profilePic;
+  }
 
   headerData = [
     {
       id: 1,
-      name: 'Divya Jaini',
+      name: 'Professor Jaini',
       class: '9th-A',
       rollNo: 10,
       imgUrl:
@@ -35,75 +57,45 @@ export class UserManagementComponent implements OnInit, OnDestroy {
 
   modules = [
     {
-      name: 'My Childs',
+      name: 'Attendance',
       image:
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
     {
-      name: 'Time Table',
+      name: 'Results',
       image:
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
     {
-      name: 'Notice Board',
-      image:
-        '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
-    },
-    {
-      name: 'Parent Profile',
-      image:
-        '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
-    },
-    {
-      name: 'Holidays',
-      image:
-        '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
-    },
-    {
-      name: 'Settings',
-      image:
-        '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
-    },
-    {
-      name: 'Exams',
-      image:
-        '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
-    },
-    {
-      name: 'Result',
+      name: 'My Topics',
       image:
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
   ];
 
-  ngOnInit(): void {}
+  openDialog(child: any) {
+    switch (child?.name) {
+      case 'Attendance':
+        this.router.navigate(['/teacher-attendance'], {
+          queryParams: { classDetails: child?.name },
+        });
+        break;
 
-  getAllChildren(body: any) {
-    this.service.getAllChildrenData(body).subscribe((res: any) => {
-      this.allChildDetails = res?.data?.childsInfo;
-      this.service.updateAllChildrenData(this.allChildDetails);
-    });
-  }
+      case 'Results':
+        this.router.navigate(['/teacher-results'], {
+          queryParams: { name: child?.name },
+        });
+        break;
 
-  getChildDetails(item: any) {
-    console.log('item===>', item);
-    let body: any = JSON.parse(sessionStorage.getItem('loggedInUser')!);
-    this.service.updateAllChildrenData([]);
-
-    switch (item?.name) {
-      case 'My Childs':
-        this.getAllChildren({ id: body?.TokenDetails?.userId });
+      case 'My Topics':
+        this.router.navigate(['/teacher-topics'], {
+          queryParams: { name: child?.name },
+        });
         break;
       // default:
       // case '':
       //   // insert your code here
       //   break;
     }
-
-    this.router.navigate(['/child-details'], {
-      queryParams: { childDetails: item?.name },
-    });
   }
-
-  ngOnDestroy() {}
 }

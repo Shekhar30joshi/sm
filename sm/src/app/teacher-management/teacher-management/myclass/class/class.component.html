@@ -1,0 +1,35 @@
+<div class="" style="height: auto">
+  <app-header
+    [route]="backRoute"
+    [title]="title"
+    [childProfilePic]="childProfilePic"
+    [profileFlag]="profileFlag"
+    [color]="color"
+  ></app-header>
+  <hr />
+  <div class="row p-3 mt-3">
+    <div
+      class="col-4 p-1"
+      *ngFor="let item of modules"
+      (click)="openDialog(item)"
+    >
+      <div class="text-center py-2">
+        <img
+          [src]="item?.image"
+          alt=""
+          class="img-fluid"
+          width="70"
+          style="height: 65px; border-radius: 15px"
+        />
+      </div>
+      <div class="text-center mt-1" style="font-family: sans-serif">
+        {{ item?.name }}
+      </div>
+    </div>
+  </div>
+  <hr />
+  <app-footer
+    style="position: sticky; bottom: 5px"
+    [footerLink]="footerLink"
+  ></app-footer>
+</div>

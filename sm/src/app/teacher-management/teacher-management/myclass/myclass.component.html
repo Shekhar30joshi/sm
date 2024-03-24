@@ -1,0 +1,43 @@
+<div class="container-fluid rounded">
+  <app-header [route]="backRoute" [title]="title"></app-header>
+  <hr />
+  <div class="row">
+    <div class="col-12 my-2" *ngFor="let class of classContents">
+      <div class="" (click)="openDialog(class)">
+        <div class="card-body">
+          <div class="row ps-3">
+            <div class="col-1 p-2">
+              <img
+                [src]="
+                  class?.profilePic
+                    ? class?.profilePic
+                    : 'https://source.unsplash.com/800x600/?nature'
+                "
+                alt=""
+                class="img-responsive"
+                width="45"
+                height="45"
+                style="border-radius: 20%; position: relative; left: 0px"
+              />
+            </div>
+            <div
+              class="col-10 text-center p-2 d-flex align-items-center justify-content-center"
+              style="background-color: #e9eef3; border-radius: 10px"
+            >
+              <span>Class Name: {{ class?.className }}</span
+              ><br />
+              <!-- <span>Last Name: {{ class?.lastName }}</span
+              ><br />
+              <span>Age: {{ class?.age }}</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+  <app-footer
+    style="position: sticky; bottom: 5px"
+    [footerLink]="footerLink"
+  ></app-footer>
+</div>

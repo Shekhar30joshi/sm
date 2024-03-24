@@ -46,8 +46,14 @@ export class LoginComponent {
       this.service.login(this.loginForm.value).subscribe(
         (res: any) => {
           if (res?.data?.status == 'success') {
+            console.log(res?.data?.userInfo?.userType);
+            res.data.userInfo.userType = 2;
             sessionStorage.setItem('loggedInUser', JSON.stringify(res?.data));
-            this.router.navigate(['/user-management']);
+            res?.data?.userInfo?.userType == 3
+              ? this.router.navigate(['/user-management'])
+              : res?.data?.userInfo?.userType == 2
+              ? this.router.navigate(['/teacher-management'])
+              : '';
           } else {
             this.showSnackbarCssStyles(res?.data?.message, '', 3000);
             return;
