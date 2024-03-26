@@ -51,21 +51,27 @@ export class MyclassComponent implements OnInit, OnDestroy {
       this.classContents = [
         {
           className: '9th A',
+          classId: 1,
         },
         {
           className: '9th B',
+          classId: 2,
         },
         {
           className: '10th A',
+          classId: 3,
         },
         {
           className: '11th A',
+          classId: 4,
         },
         {
           className: '12th A',
+          classId: 5,
         },
         {
           className: '12th B',
+          classId: 6,
         },
       ];
     });

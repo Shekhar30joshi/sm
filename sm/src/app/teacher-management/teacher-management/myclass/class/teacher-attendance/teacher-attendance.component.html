@@ -8,6 +8,39 @@
   ></app-header>
   <hr />
 
+  <div class="row">
+    <div class="col-12 text-center">
+      <div class="table-responsive px-3">
+        <table class="table">
+          <tr class="m-2">
+            <th>S.N</th>
+            <th>Name</th>
+            <th>Roll No</th>
+            <th>Present</th>
+            <th>Absent</th>
+          </tr>
+          <tr *ngFor="let data of player; let i = index" class="m-2">
+            <td>{{ i + 1 }}</td>
+            <td>{{ data.name }}</td>
+            <td>{{ data.rn }}</td>
+            <td *ngFor="let stat of status">
+              <input
+                type="radio"
+                id="opt1+{{ data.id }}"
+                [(ngModel)]="data.status"
+                value="{{ stat }}"
+                name="option+{{ data.id }}"
+              />
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <button (click)="submit()" class="btn btn-success">
+        Submit Attendance
+      </button>
+    </div>
+  </div>
   <hr />
   <app-footer
     style="position: sticky; bottom: 5px"

@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CommonService } from 'src/app/services/common.service';
+import Swal from 'sweetalert2';
+import 'sweetalert2/src/sweetalert2.scss';
 @Component({
   selector: 'app-teacher-attendance',
   templateUrl: './teacher-attendance.component.html',
   styleUrls: ['./teacher-attendance.component.scss'],
 })
 export class TeacherAttendanceComponent implements OnInit {
-  constructor() {}
+  constructor(private service: CommonService) {}
 
-  ngOnInit(): void {
-    let child = JSON.parse(sessionStorage.getItem('class')!);
-    this.child = child;
-    this.title = child.firstName;
-    this.childProfilePic = child?.profilePic;
-  }
   footerLink = '/teacher-management';
   title = 'Attendance';
   backRoute: string = '/class';
@@ -75,24 +72,94 @@ export class TeacherAttendanceComponent implements OnInit {
         '../../assets/images/back-school-concept-books-colored-pencils-clock.jpg',
     },
   ];
+  player = [
+    {
+      id: 1,
+      name: 'harry',
+      rn: 10,
+      status: null,
+    },
+    {
+      id: 2,
+      name: 'boris',
+      rn: 11,
+      status: null,
+    },
+    {
+      id: 3,
+      name: 'ramesh',
+      rn: 13,
+      status: null,
+    },
+    {
+      id: 4,
+      name: 'suresh',
+      rn: 14,
+      status: null,
+    },
+    {
+      id: 5,
+      name: 'john',
+      rn: 15,
+      status: null,
+    },
+    {
+      id: 6,
+      name: 'johnny',
+      rn: 16,
+      status: null,
+    },
+    {
+      id: 7,
+      name: 'kamlesh',
+      rn: 17,
+      status: null,
+    },
+    {
+      id: 8,
+      name: 'hardik',
+      rn: 18,
+      status: null,
+    },
+    {
+      id: 9,
+      name: 'rohit',
+      rn: 19,
+      status: null,
+    },
+  ];
+  status = ['present', 'absent'];
 
-  openDialog(child: any) {
-    switch (child?.name) {
-      case 'Attendance':
-        // this.router.navigate(['/attendance'], {
-        //   queryParams: { childDetails: child?.name },
-        // });
-        break;
+  submit() {
+    let data = this.player.map((x) => {
+      return {
+        name: x.name,
+        rn: x.rn,
+        status: x.status,
+      };
+    });
+    console.log(data);
+    let totalPresent = data.filter((el) => el.status == 'present');
+    let totalAbsent = data.filter((el) => el.status == 'absent');
+    Swal.fire({
+      title: '<h1>Attendance Summary !</h1>',
+      html: `<p class="text-success">Total Present : <b>${totalPresent.length}</b></p>
+      <p class="text-danger"> Total Absent : <b>${totalAbsent.length}</b></p>`,
+    }).then((res) => {
+      console.log(res);
+      if (res.isConfirmed == true) {
+        //api call
+        this.service.studentsAttendance(data).subscribe((res: any) => {
+          console.log(res);
+        });
+      }
+    });
+  }
 
-      case 'Subject':
-        // this.router.navigate(['/subject'], {
-        //   queryParams: { name: child?.name },
-        // });
-        break;
-      // default:
-      // case '':
-      //   // insert your code here
-      //   break;
-    }
+  ngOnInit(): void {
+    let child = JSON.parse(sessionStorage.getItem('class')!);
+    this.child = child;
+    this.title = child.className;
+    this.childProfilePic = child?.profilePic;
   }
 }

@@ -26,8 +26,11 @@ export class CommonService {
     return this.httpClient.post(this.baseUrl + 'users/getChilds', body);
   }
 
-  //get aall subjects
+  studentsAttendance(body: any) {
+    return this.httpClient.post(this.baseUrl + 'users/getChilds', body);
+  }
 
+  //get all subjects
   getAllSubject(body: any) {
     return this.httpClient.post(
       this.baseUrl + 'class_subjects/getClassSubjects',
